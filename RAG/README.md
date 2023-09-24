@@ -8,6 +8,6 @@ This folder contains code to run different RAG with LangChain using OpenAI's GPT
 
 ### Implementation
 
-'''
+```
 python RAG.py apikey data document output_file
-'''
+```
