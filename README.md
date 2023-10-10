@@ -19,12 +19,11 @@ Recent advancements in Large Language Models (LLMs) have accelerated their usage
   <b>ROC curve of GPT-4 zero-shot symptom prediction</b>
 </p>
 
-## Instructions for running the experiments
----
-### Setting up an environment
+## Setting up an environment
 
 We recommend that you run experiments in a virtual environment where you have installed all the necessary packages.
 You may install the requirements using the requirements.txt file:
 ```
 pip install -r requirements.txt
 ```
+Please read the detailed manuals in each subfolder
