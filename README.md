@@ -14,7 +14,7 @@ Recent advancements in Large Language Models (LLMs) have accelerated their usage
 <br><br>
   <img src="imgs/Summarization.png">
   <b>Procedure for Summary using the traumatic experiences and symptoms</b>
-<br>
+<br><br>
   <img src="imgs/ROC.png">
   <b>ROC curve of GPT-4 zero-shot symptom prediction</b>
 </p>
