@@ -1,4 +1,4 @@
-# Extracting Symptom and Section
+# Summarization 
 
 ## Overview
 
