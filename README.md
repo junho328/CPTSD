@@ -27,3 +27,14 @@ You may install the requirements using the requirements.txt file:
 pip install -r requirements.txt
 ```
 Please read the detailed manuals in each subfolder
+
+## Remind
+
+### Estimated Section Accuracy
+
+The calculation of estimated section accuracy using mid-token distance, as presented in the paper, is not accompanied by specific code due to duplicate interview paragraphs and exceptional cases. <br> 
+Please refer to the paper for the method of detailed procedure to calculate mid-token distance.
+
+### Fine-tuning
+
+As mentioned in the paper, we fine-tuned GPT-3.5 to compare the performance of zero-shot and fine-tuned one. The data for fine-tuning was created using the 'merge_json' function from 'summarization/json_utils.py,' and the fine-tuning process was conducted with reference to *[OpenAI's Fine-tuning documentation](https://platform.openai.com/docs/guides/fine-tuning)*
