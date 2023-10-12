@@ -8,9 +8,9 @@ from utils import calculate_metrics
 
 
 parser = argparse.ArgumentParser(description='Extract Symptom and Section with Zero-shot Inference') 
-parser.add_argument('data',help='Data File After Label Extraction with Excel Format', required=True)  
-parser.add_argument('apikey', help='Your openai api key', required=True)   
-parser.add_argument('result',help='Filename of result data', required=True)
+parser.add_argument('--data',help='Data File After Label Extraction with Excel Format', required=True)  
+parser.add_argument('--apikey', help='Your openai api key', required=True)   
+parser.add_argument('--result',help='Filename of result data', required=True)
 
 args = parser.parse_args()
 data_filename = args.data
