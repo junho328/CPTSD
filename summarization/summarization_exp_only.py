@@ -5,10 +5,10 @@ from KoBERTScore_j.KoBERTScore.score import BERTScore, bert_score
 
 
 parser = argparse.ArgumentParser(description='Summarization using experience only') 
-parser.add_argument('exp',help='Extracted Experience Data file with Excel format', required=True)   
-parser.add_argument('apikey', help='Your openai api key', required=True)   
-parser.add_argument('gpt4summary', help='Filename of GPT4 Summary',required=True)
-parser.add_argument('summary', help='True Summary file', required=True)
+parser.add_argument('--exp',help='Extracted Experience Data file with Excel format', required=True)   
+parser.add_argument('--apikey', help='Your openai api key', required=True)   
+parser.add_argument('--gpt4summary', help='Filename of GPT4 Summary',required=True)
+parser.add_argument('--summary', help='True Summary file', required=True)
 
 args = parser.parse_args()
 exp_file = args.exp
