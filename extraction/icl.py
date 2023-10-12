@@ -4,10 +4,10 @@ import pandas as pd
 import argparse
 
 parser = argparse.ArgumentParser(description='Extract Symptom and Section with In-Context Learning method') 
-parser.add_argument('data',help='Data File After Label Extraction with Excel Format', required=True)  
-parser.add_argument('examplar',help='Examplar File for In-Context Learning with Excel Format', required=True)
-parser.add_argument('apikey', help='Your openai api key', required=True)   
-parser.add_argument('result',help='Filename of result data', required=True)
+parser.add_argument('--data',help='Data File After Label Extraction with Excel Format', required=True)  
+parser.add_argument('--examplar',help='Examplar File for In-Context Learning with Excel Format', required=True)
+parser.add_argument('--apikey', help='Your openai api key', required=True)   
+parser.add_argument('--result',help='Filename of result data', required=True)
 
 args = parser.parse_args()
 data_filename = args.data
