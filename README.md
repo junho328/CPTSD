@@ -30,7 +30,7 @@ Please read the detailed manuals in each subfolder
 
 ## Data Format
 
-We saved our initial training data in an Excel file. The initial data consisted of 'Statement,' 'Symptom,' and 'Section.'<br>
+We saved our initial training data in an Excel file(.xlsx). The initial data consisted of 'Statement,' 'Symptom,' and 'Section.'<br>
 ```Statement``` One segment from the interview with the patient <br>
 ```Symptom```  Psychiatric symptoms related to PTSD labeled by mental health specialists. symptoms <br>
 ```Section```  Section with symptoms labeled by mental health specialists <br>
