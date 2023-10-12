@@ -4,8 +4,8 @@ import pandas as pd
 import argparse
 
 parser = argparse.ArgumentParser(description='Draw ROC Curve with thresholds') 
-parser.add_argument('data',help='Data File with Excel Format', required=True)  
-parser.add_argument('name',help='Image Name', required=True)  
+parser.add_argument('--data',help='Data File with Excel Format', required=True)  
+parser.add_argument('--name',help='Image Name', required=True)  
 
 args = parser.parse_args()
 data = args.data
