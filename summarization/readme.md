@@ -16,7 +16,7 @@ Meaning of each arguments:<br>
 ```gpt4summary``` Filename of GPT4 Summary <br>
 ```summary``` True Summary file <br>
 ```
-python3 summarization_exp_only.py exp apikey gpt4summary summary
+python3 summarization_exp_only.py --exp=exp --apikey=apikey --gpt4summary=gpt4summary --summary=summary
 ```
 
 ### Symptom Only
@@ -29,7 +29,7 @@ Meaning of each arguments:<br>
 ```gpt4summary``` Filename of GPT4 Summary <br>
 ```summary``` True Summary file <br>
 ```
-python3 summarization_symp_only.py symp apikey gpt4summary summary
+python3 summarization_symp_only.py --symp=symp --apikey=apikey --gpt4summary=gpt4summary --summary=summary
 ```
 
 ### Experience and Symptom Both
@@ -43,5 +43,5 @@ Meaning of each arguments:<br>
 ```gpt4summary``` Filename of GPT4 Summary <br>
 ```summary``` True Summary file <br>
 ```
-python3 summarization_exp_symp.py exp symp apikey gpt4summary summary
+python3 summarization_exp_symp.py --exp=exp --symp=symp --apikey=apikey --gpt4summary=gpt4summary --summary=summary
 ```
