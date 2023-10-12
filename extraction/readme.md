@@ -15,7 +15,7 @@ Meaning of each arguments:<br>
 ```apikey``` Your openai api key <br>
 ```result``` Filename of result data <br>
 ```
-python3 zeroshot.py data apikey result
+python3 zeroshot.py --data=data --apikey=apikey --result=result
 ```
 
 ### In-Context Learning
@@ -29,7 +29,7 @@ Meaning of each arguments:<br>
 ```apikey``` Your openai api key <br>
 ```result``` Filename of result data <br>
 ```
-python3 icl.py data apikey examplar result
+python3 icl.py --data=data --apikey=apikey --examplar=examplar --result=result
 ```
 
 ### Chain-of-Thought
@@ -43,5 +43,5 @@ Meaning of each arguments:<br>
 ```apikey``` Your openai api key <br>
 ```result``` Filename of result data <br>
 ```
-python3 cot.py data definition apikey result
+python3 cot.py --data=data --definition=definition --apikey=apikey --result=result
 ```
