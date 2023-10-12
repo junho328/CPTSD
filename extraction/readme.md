@@ -37,8 +37,3 @@ Meaning of each arguments:<br>
 ```
 python3 cot.py data definition apikey result
 ```
-
-## Remind
-
-The calculation of estimated section accuracy using mid-token distance, as presented in the paper, is not accompanied by specific code due to duplicate interview paragraphs and exceptional cases. <br> 
-Please refer to the paper for the method of detailed procedure to calculate mid-token distance.
