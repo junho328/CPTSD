@@ -6,10 +6,10 @@ from KoBERTScore_j.KoBERTScore.score import BERTScore, bert_score
 
 
 parser = argparse.ArgumentParser(description='Summarization using symptom only') 
-parser.add_argument('symp',help='Extracted Symptom Data file with Excel format', required=True)   
-parser.add_argument('apikey', help='Your openai api key', required=True)   
-parser.add_argument('gpt4summary', help='Filename of GPT4 Summary',required=True)
-parser.add_argument('summary', help='True Summary file', required=True)
+parser.add_argument('--symp',help='Extracted Symptom Data file with Excel format', required=True)   
+parser.add_argument('--apikey', help='Your openai api key', required=True)   
+parser.add_argument('--gpt4summary', help='Filename of GPT4 Summary',required=True)
+parser.add_argument('--summary', help='True Summary file', required=True)
 
 args = parser.parse_args()
 symp_file = args.symp
