@@ -38,7 +38,7 @@ Extract traumatic symptom and section from patient interview transcripts with Ch
 Please refer to *[the respective paper](https://arxiv.org/abs/2201.11903)* for detailed information on Chain-of-Thought method.
 
 Meaning of each arguments:<br>
-```data``` data File After Label Extraction with Excel Format <br>
+```data``` Data File After Label Extraction with Excel Format <br>
 ```definition``` Symptom Definition File with Excel Forma <br>
 ```apikey``` Your openai api key <br>
 ```result``` Filename of result data <br>
