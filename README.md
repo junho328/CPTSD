@@ -1,12 +1,13 @@
-# Adapting GPT for Assisting Clinical Psychiatry Practice with Patient Interview Transcripts
+# Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization
 
-Jy-yong Sohn, Jae-hee So, Joonhwan Chang, Eunji Kim, Junho Na, JiYeon Choi, Byung-Hoon Kim, Sang Hui Chu
+Jae-hee So, Joonhwan Chang, Eunji Kim, Junho Na, JiYeon Choi, Jy-yong Sohn, Byung-Hoon Kim, Sang Hui Chu
 
-This repository is the code implementation of paper *[Adapting GPT for Assisting Clinical Psychiatry Practice with Patient Interview Transcripts](https://openreview.net/forum?id=78TXBcyBB1)* 
+This repository is the code implementation of paper *[Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization]()* 
 
 ## Abstract
 
-Recent advancements in Large Language Models (LLMs) have accelerated their usage in various domains including healthcare, law, entertainment, to name a few. However, we have a lack of understanding on how to use LLMs for diagnosing mental health issues of patients. In this paper, we shed light on the intersection of mental health diagnosis and LLMs by conducting initial experiments. Specifically, we explore using LLMs for analyzing counseling data from North Korean defectors with mental health issues. We focused on the performance of LLMs on three sub-tasks: (1) extract key experiences and symptoms of the patients, (2) write summaries of patient cases, and (3) infer evidence of mental health problems, such as highlighting specific sections within the counseling data. To assist in the training of LLMs, we propose a novel technique involving mental health specialists in data labeling, which is shown to enhance the performance of LLMs. Our experimental results show that LLMs have high performance on three target sub-tasks, even in the zero-shot inference with appropriate prompting. This research contributes to the nascent field of applying LLMs to mental health diagnosis and demonstrates their potential effectiveness in aiding mental health practitioners.
+Recent advancements in Large Language Models (LLMs) have accelerated their usage in various domains. Given the fact that psychiatric interviews are goal-oriented and structured dialogues between the professional interviewer and the interviewee, it is one of the most underexplored areas where LLMs can contribute substantial value. Here, we explore the use of LLMs for enhancing psychiatric interviews, by analyzing counseling data from North Korean defectors with traumatic events and mental health issues. Specifically, we investigate whether LLMs can (1) delineate the part of the conversation that suggests psychiatric symptoms and name the symptoms, and (2) summarize stressors and symptoms, based on the interview dialogue transcript. Here, the transcript data was labeled by mental health experts for training and evaluation of LLMs. 
+Our experimental results show that appropriately prompted LLMs can achieve high performance on both the symptom delineation task and the summarization task. This research contributes to the nascent field of applying LLMs to psychiatric interview and demonstrates their potential effectiveness in aiding mental health practitioners.
 
 <p align="center">
   <img src="imgs/Extraction.png">
