@@ -10,14 +10,11 @@ Recent advancements in Large Language Models (LLMs) have accelerated their usage
 Our experimental results show that appropriately prompted LLMs can achieve high performance on both the symptom delineation task and the summarization task. This research contributes to the nascent field of applying LLMs to psychiatric interview and demonstrates their potential effectiveness in aiding mental health practitioners.
 
 <p align="center">
-  <img src="imgs/Extraction.png">
-  <b>Procedure for Extracting traumatic expereiences of patient interview transcriptions</b>
+  <img src="imgs/system_setup_2.png">
+  <b>Overview</b>
 <br><br>
-  <img src="imgs/Summarization.png">
-  <b>Procedure for Summary using the traumatic experiences and symptoms</b>
-<br><br>
-  <img src="imgs/ROC.png">
-  <b>ROC curve of GPT-4 zero-shot symptom prediction</b>
+  <img src="imgs/fig_modules.pdf">
+  <b>Modules for extracting the traumatic stressors and symptoms</b>
 </p>
 
 ## Setting up an environment
