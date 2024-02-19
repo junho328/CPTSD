@@ -13,7 +13,7 @@ Our experimental results show that appropriately prompted LLMs can achieve high 
   <img src="imgs/system_setup_2.png">
   <b>Overview</b>
 <br><br>
-  <img src="imgs/fig_modules.pdf">
+  <img src="imgs/fig_modules.png">
   <b>Modules for extracting the traumatic stressors and symptoms</b>
 </p>
 
