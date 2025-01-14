@@ -52,12 +52,12 @@ def icl(df1, df2):
         messages = [
             {"role": "system", "content": "You'll have several sets of inputs and outputs.\
                     The input is a interview transcript, and the output is a list of Depression and Bipolar symptoms and the section in which they occurred in the previous input.\
-                    If you think the patient has Depression and Bipolar symptoms based on the input query given at the end, please tell the symptoms and the sections that suggest them.\
+                    If you think the patient has Depression and Bipolar symptoms in a given input query, please tell the symptoms and the sections that suggest them.\
                     When answering, please answer symptoms in the form ‘- Symptoms : ...’ and sections in the form ‘- Sections : ...’.\
-                    If you don't have Depression and Bipolar symptoms in a given interview, pelase answer ‘not applicable’. Do not arbitrarily assume you have Depression or Bipolar symptoms.\
+                    If you don't have Depression and Bipolar symptoms in a given interview, pelase answer ‘Not applicable’. Do not arbitrarily assume you have Depression or Bipolar symptoms.\
                     Only if you're sure, tell us the symptoms and sections.\
                     The symptoms can be answered using in-context learning by referring to the previous set of inputs and outputs."},
-            {"role": "user", "content": "Based on the correspondence and content of the given input and output examples, identify the symptoms of Psychiatric disorders and the sections that suggest them, if any, in the interview shown in the last Input Query. If there are no Depression or Bipolar symptoms in the given interview, answer ‘N/A’."+full_prompt}
+            {"role": "user", "content": "Based on the correspondence and content of the given input and output examples, identify the symptoms of Psychiatric disorders and the sections that suggest them, if any, in the interview shown in the last Input Query. If there are no Depression or Bipolar symptoms in the given interview, answer ‘Not applicable’."+full_prompt}
         ]
 
         response = openai.ChatCompletion.create(
