@@ -37,18 +37,6 @@ def combine_summaries(filename):
 # Define the function to be provided to the user
 def generate_simplified_combined_summary(filename, target_col='Estimated symptom'):
     
-    # Function to determine if a Korean noun has a final consonant (받침)
-    def has_final_consonant(word):
-        if not word:
-            return False
-        last_char = word[-1]
-        # Unicode offset for Korean characters
-        offset = ord('가')
-        # Unicode code for the last character
-        last_char_code = ord(last_char) - offset
-        # Check if the last character has a final consonant (받침)
-        return (last_char_code % 28) != 0
-    
     # Load the Excel file
     data_file = pd.ExcelFile(filename)
     
@@ -61,14 +49,11 @@ def generate_simplified_combined_summary(filename, target_col='Estimated symptom
         symptom = row.get(target_col, None)
         
         # Skip the row if the value is '해당없음' or NaN
-        if pd.isna(symptom) or symptom == '해당없음':
+        if pd.isna(symptom) or symptom == 'Not applicable':
             continue
         
-        # Determine whether the noun has a 받침 (final consonant) to correctly use '이' or '가'
-        particle = '이' if has_final_consonant(symptom) else '가'
-        
         # Create a formatted summary for this row using the simplified format
-        formatted_summary = f"{symptom}{particle} 나타났다."
+        formatted_summary = f"{symptom} appears."
         
         # Append the formatted summary to the list
         formatted_summaries_list.append(formatted_summary)
@@ -84,15 +69,14 @@ def gpt4_summary(text,text2):
         
     model = "gpt-4"
     
-    query = "해당 인터뷰에 대한 PTSD 경험과 정신건강학적 증상 추출 정보를 250단어로 요약해줘."+"\n 경험 추출 : "+text + "\n 증상 추출 : "+ text2
+    query = "In 250 words, summarise the Depression and Bipolar experience and mental health symptom extraction information for this interview."+"\n Extracting experience : "+text + "\n Extracting symptoms : "+ text2
         
     messages = [
         {"role": "system", "content": 
-            "인터뷰를 통해서 해당 인터뷰 대상자가 정신건강학적으로 유의미한 경험을 한 부분을 추출하여 정리하여 하나의 문자열로 합쳤어.\
-            추가로 인터뷰를 통해서 인터뷰 대상자가 정신건강학적 증상을 보인 부분을 추출하여 정리하여 하나의 문자열로 합쳤어.\
-            너에게 해당 문자열들이 제공되고 이를 합쳐서 요약해달라고 요청을 할거야.\
-            해당 요약문은 정신건강의학 의사가 진단 전에 미리 환자를 파악하는데 도움을 주기 위해서 작성되는 것이야.\
-            목적에 맡게 요약을 해줘."},
+            "The interviewer's mental health experiences were extracted, organised and combined into a single string.\
+            You will be given that string and asked to summarise it.\
+            The summaries are intended to help mental health practitioners get to know the patient before diagnosis.\
+            Summarise for this purpose."},
         {"role": "user", "content": query}
         ]
     
@@ -110,14 +94,14 @@ def gpt4_true_text_summary(text):
         
     model = "gpt-4"
     
-    query = "해당 인터뷰에 대한 PTSD 경험 추출 정보를 공백 포함 650자 내외로 요약해줘."+"\n"+text
+    query = "Please summarise the Depression and Bipolar experience extraction information for this interview in 250 characters or less, including spaces."+"\n"+text
         
     messages = [
         {"role": "system", "content": 
-            "인터뷰를 통해서 해당 인터뷰 대상자가 정신건강학적으로 유의미한 경험을 한 부분을 추출하여 정리하여 하나의 문자열로 합쳤어.\
-            너에게 해당 문자열이 제공되고 이를 요약해달라고 요청을 할거야.\
-            해당 요약문은 정신건강의학 의사가 진단 전에 미리 환자를 파악하는데 도움을 주기 위해서 작성되는 것이야.\
-            목적에 맡게 요약을 해줘."},
+            "We've extracted the parts of the interview where the interviewee had a mental health experience of significance, organised them, and combined them into a string.\
+            You will be given that string and asked to summarise it.\
+            The summaries are intended to help mental health practitioners get to know the patient before diagnosis.\
+            Summarise for this purpose."},
         {"role": "user", "content": query}
         ]
     
