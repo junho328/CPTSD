@@ -13,8 +13,8 @@ def convert_excel_json(excel_filepath, json_filename):
     # Loop over each row in the dataframe
     for idx, row in df.iterrows():
         # Construct the prompt and completion strings
-        prompt = f"다음 상담 내용을 보고 정신건강의학적으로 유의미한 증상이 있다고 생각되면 해당 증상과 이를 시사하는 구획을 알려줘. {row['Statement']}"
-        completion = f"- 증상 : {row['Symptom']}\n- 구획 : {row['Section']}"
+        prompt = f"If you think the following interview has psychiatrically significant symptoms, please tell what they are and the secions that suggest them. {row['Statement']}"
+        completion = f"- Symptoms : {row['Symptom']}\n- Sections : {row['Section']}"
 
         # Add the row to the data list as a dictionary
         data.append({
@@ -39,11 +39,11 @@ def merge_json(json_files:list):
             data = json.load(file)
             merged_data += data
 
-    # 병합된 데이터를 새로운 파일에 저장
+    # Save the merged data to a new file 
     with open('./json_sumup/P_train_all.json', 'w', encoding='utf-8') as outfile:
         json.dump(merged_data, outfile,ensure_ascii=False)
 
-# Remove 'None(해당없음)' data from jsonl files
+# Remove 'None(Not applicable)' data from jsonl files
 def remove_none(origin,new):
 
     data = []
@@ -51,8 +51,8 @@ def remove_none(origin,new):
         for line in f:
             data.append(json.loads(line))
 
-    # Filter out elements where completion contains '해당없음'
-    filtered_data = [item for item in data if '해당없음' not in item['completion']]
+    # Filter out elements where completion contains 'Not applicable'
+    filtered_data = [item for item in data if 'Not applicable' not in item['completion']]
 
     # Save the filtered data back to a jsonl file
     with open(new, 'w', encoding='utf-8') as f:
