@@ -28,7 +28,7 @@ def add_CoT_explanation(cot_df, symptom_definition_df):
         if len(definition) > 0:
             definition = definition[0]
 
-            cot_df.at[index, 'CoT explanation'] = f"{{ {symptom} }}의 정의는 {{ {definition} }}이고, 이에 따라 {{ {section} }} 구획에서 {{ {symptom} }} 증상이 나타나는 것으로 보입니다."
+            cot_df.at[index, 'CoT explanation'] = f"{{ {symptom} }} is defined as {{ {definition} }}and, accordingly {{ {section} }} In the section, {{ {symptom} }} appears to be symptomatic."
 
     return cot_df
 
@@ -64,12 +64,12 @@ def cot(df1, df2):
 
 
         messages = [
-            {"role": "system", "content": "너에게 Input과 Output 예시 set들이 주어질 거야.\
-            Input에는 상담 내용이 있고, Output에는 직전 Input에서 주어진 PTSD 증상의 정의를 기반으로 해당 구획에서 발견되는 특정 PTSD 증상을 설명하고 있어.\
-            대답을 할 때 위에 주어진 Input과 Output 형태를 참고해서 대답해줘. 하나의 구획에 여러 증상이 존재한다면 증상을 여러번 대답해도 돼.\
-            주어진 Input Query에 PTSD 증상이 여러개 존재한다고 생각하면 증상과 구획을 여러번 대답해줘도 돼.\
-            만약 주어진 인터뷰에 PTSD 증상이 없다면 '해당없음'이라고 대답해줘."},
-            {"role": "user", "content": "주어진 Input과 Output 예시들의 대응관계와 내용을 바탕으로 해서, 마지막 Input Query에 나타난 상담 내용을 보고 PTSD 증상이 나타나면 해당 증상과 이를 시사하는 구획을 알려줘."+full_prompt_CoT3}
+            {"role": "system", "content": "You'll be given a set of example Inputs and Outputs.\
+            The Input is the interview transcript, and the Output describes the specific Depression and Bipolar symptoms found in that section based on the definition of Depression and Bipolar symptoms given in the previous Input.\
+            When answering, please refer to the input and output forms given above. If there are multiple symptoms in a compartment, you can answer multiple times.\
+            If you think there are multiple Depression and Bipolar symptoms in a given Input Query, you can answer multiple symptoms and categories.\
+            If you don't have Depresion and Bipolar symptoms in a given interview, answer ‘N/A’."},
+            {"role": "user", "content": "Based on the correspondence and content of the given input and output examples, if the patient in the last Input Query shows Depression and Bipolar symptoms, please tell the symptoms and the sections that suggest them."+full_prompt_CoT3}
         ]
         
         response = openai.ChatCompletion.create(
