@@ -68,7 +68,7 @@ def cot(df1, df2):
             The Input is the interview transcript, and the Output describes the specific Depression and Bipolar symptoms found in that section based on the definition of Depression and Bipolar symptoms given in the previous Input.\
             When answering, please refer to the input and output forms given above. If there are multiple symptoms in a section, you can answer multiple times.\
             If you think there are multiple Depression and Bipolar symptoms in a given Input Query, you can answer multiple symptoms and sections.\
-            If you don't have Depresion and Bipolar symptoms in a given interview, answer ‘N/A’."},
+            If you don't have Depresion and Bipolar symptoms in a given interview, answer ‘Not applicable’."},
             {"role": "user", "content": "Based on the correspondence and content of the given input and output examples, if the patient in the last Input Query shows Depression and Bipolar symptoms, please tell the symptoms and the sections that suggest them."+full_prompt_CoT3}
         ]
         
