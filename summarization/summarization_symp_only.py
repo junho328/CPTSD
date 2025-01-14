@@ -39,14 +39,14 @@ def gpt4_summary(text):
         
     model = "gpt-4"
 
-    query = "해당 인터뷰에 대한 PTSD 경험 추출 정보를 250단어로 요약해줘."+"\n"+text
+    query = "Summarise the Depression and Bipolar experience extract for this interview in 250 words. "+"\n"+text
         
     messages = [
         {"role": "system", "content": 
-            "인터뷰를 통해서 인터뷰 대상자가 정신건강학적 증상을 보인 부분을 추출하여 정리하여 하나의 문자열로 합쳤어.\
-            너에게 해당 문자열이 제공되고 이를 요약해달라고 요청을 할거야.\
-            해당 요약문은 정신건강의학 의사가 진단 전에 미리 환자를 파악하는데 도움을 주기 위해서 작성되는 것이야.\
-            목적에 맡게 요약을 해줘."},
+            "We have extracted the parts of the interview where the interviewee had a mental health experience of significance, organised them, and combined them into a string.\
+            You will be given that string and asked to summarise it.\
+            The summaries are intended to help mental health practitioners get to know the patient before diagnosis.\
+            Summarise for this purpose."},
         {"role": "user", "content": query}
         ]
 
