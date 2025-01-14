@@ -24,7 +24,7 @@ def create_icl_prompt(df):
         section = row['Section']
         symptom = row['Symptom']
 
-        prompt = f"Input: {statement}\nOutput: - 증상: {symptom} - 구획: {section}"
+        prompt = f"Input: {statement}\nOutput: - Symptoms : {symptom} - Sections : {section}"
         prompts.append(prompt)
 
     # Joining all the prompts together
@@ -50,14 +50,14 @@ def icl(df1, df2):
 
         # 메시지 설정하기
         messages = [
-            {"role": "system", "content": "너에게 여러 세트의 Input과 Output이 주어질 거야.\
-                    Input에는 상담 내용이 주어지고, Output에는 바로 앞 Input에서 나타나는 PTSD 증상과 증상이 나타난 구획이 쓰여있어.\
-                    마지막에 주어지는 Input Query에 나타난 상담 내용을 보고 PTSD 증상이 있다고 생각하면 해당 증상과 이를 시사하는 구획을 알려주면 돼.\
-                    대답을 할 때 증상은 '- 증상: ...' 형태로 대답하고 구획은 '- 구획: ...' 형태로 대답해줘.\
-                    만약 주어진 인터뷰에 PTSD 증상이 없다면 반드시 '해당없음'이라고 대답해줘야 해. 마음대로 PTSD 증상이 있다고 판단하지 않았으면 좋겠어.\
-                    확신이 있는 경우에만, 증상과 구획을 알려줘.\
-                    증상은 in-context learning을 활용하여 앞선 Input과 Output 세트들을 참고해서 대답해주면 돼."},
-            {"role": "user", "content": "주어진 Input과 Output 예시들의 대응관계와 내용을 바탕으로 해서, 마지막 Input Query에 나타난 상담 내용을 보고 PTSD 증상이 나타나면 해당 증상과 이를 시사하는 구획을 알려줘. 만약 주어진 인터뷰에 PTSD 증상이 없다면 '해당없음'이라고 대답해줘."+full_prompt}
+            {"role": "system", "content": "You'll have several sets of inputs and outputs.\
+                    The input is a interview transcript, and the output is a list of Depression and Bipolar symptoms and the section in which they occurred in the previous input.\
+                    If you think the patient has Depression and Bipolar symptoms based on the input query given at the end, please tell the symptoms and the sections that suggest them.\
+                    When answering, please answer symptoms in the form ‘- Symptoms : ...’ and sections in the form ‘- Sections : ...’.\
+                    If you don't have Depression and Bipolar symptoms in a given interview, pelase answer ‘not applicable’. Do not arbitrarily assume you have Depression or Bipolar symptoms.\
+                    Only if you're sure, tell us the symptoms and sections.\
+                    The symptoms can be answered using in-context learning by referring to the previous set of inputs and outputs."},
+            {"role": "user", "content": "Based on the correspondence and content of the given input and output examples, identify the symptoms of Psychiatric disorders and the sections that suggest them, if any, in the interview shown in the last Input Query. If there are no Depression or Bipolar symptoms in the given interview, answer ‘N/A’."+full_prompt}
         ]
 
         response = openai.ChatCompletion.create(
