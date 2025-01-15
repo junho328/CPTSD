@@ -59,8 +59,8 @@ ipython==8.11.0
 ipython-genutils==0.2.0
 ipywidgets==8.0.5
 isoduration==20.11.0
-jax==0.3.14
-jaxlib==0.4.12
+# jax==0.3.14
+# jaxlib==0.4.12
 jedi==0.18.2
 Jinja2==3.1.2
 joblib==1.2.0

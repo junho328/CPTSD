@@ -15,7 +15,7 @@ def calculate_metrics(filename):
     accuracy_plus = (data_filtered['Correct2'] == 1).sum() / len(data_filtered)
 
     # Calculating Sensitivity
-    sensitivity_rows = data_filtered[(data_filtered['Symptom'] != 'Not applicable') & (data_filtered['Estimated symptom'] != ''Not applicable')]
+    sensitivity_rows = data_filtered[(data_filtered['Symptom'] != 'Not applicable') & (data_filtered['Estimated symptom'] != 'Not applicable')]
     sensitivity = len(sensitivity_rows) / len(data_filtered[data_filtered['Symptom'] != 'Not applicable'])
 
     # Calculating Specificity

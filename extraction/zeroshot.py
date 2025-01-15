@@ -36,8 +36,7 @@ def zeroshot(df):
                 query = f"If you think the following consultation has psychiatrically significant symptoms, please tell what they are and the sections in the text where you find these symptoms. {row['Statement']}"
 
                 messages = [
-                    {"role": "system", "content": "
-                    You will be given the following interview between a psychiatrist and a patient. If you think there are any psychiatrically significant symptoms in the following interview, please tell what they are and the sections that suggest them.\
+                    {"role": "system", "content": "You will be given the following interview between a psychiatrist and a patient. If you think there are any psychiatrically significant symptoms in the following interview, please tell what they are and the sections that suggest them.\
                     Please answer symptoms in the form '- Symptoms : ...' and sections in the form '- Sections : ...'. If there are no psychiatrically significant symptoms in a given interview, please answer 'N/A'.\
                     Psychiatrically significant symptoms include alcohol dependence, anxiety, avoidance, chest pain, insomnia, negative cognitive changes, feelings of self-worthlessness, reexperiencing, suicidal ideation, psychomotor agitation, hyperarousal, choking, and loss of interest.\
                     "},
@@ -63,7 +62,7 @@ def zeroshot(df):
                 elif symptom_match:
                     # Strip the leading ':' and whitespace
                     symptom = symptom_match.group(1).lstrip(': ').strip()
-                    df.loc[idx, 'Estimated symptom'] = symptom
+                    df.loc[idx, 'Estimated Symptom'] = symptom
                 
                     # Check if the estimated symptom matches the actual symptom
                     if symptom == row['Symptom']:
