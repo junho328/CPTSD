@@ -24,9 +24,6 @@ LLMs, using either (1) appropriate prompting techniques or (2) fine-tuning metho
 <p align="center">
   <img src="imgs/system.png">
   <b>Overview</b>
-<br><br>
-  <img src="imgs/fig_modules.png">
-  <b>Modules for extracting the traumatic stressors and symptoms</b>
 </p>
 
 ## Setting up an environment
