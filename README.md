@@ -2,7 +2,7 @@
 
 Jae-hee So, Joonhwan Chang, Eunji Kim, Junho Na, JiYeon Choi, Jy-yong Sohn, Byung-Hoon Kim, Sang Hui Chu
 
-This repository is the code implementation of paper *[Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization : Pilot Study]()* 
+This repository is the code implementation of paper *[Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization : Pilot Study](https://formative.jmir.org/2024/1/e58418/)* 
 
 ## Abstract
 
