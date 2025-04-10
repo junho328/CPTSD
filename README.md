@@ -22,7 +22,7 @@ Conclusions:
 LLMs, using either (1) appropriate prompting techniques or (2) fine-tuning methods with data labeled by mental health experts, achieved an accuracy of over 0.8 for the symptom delineation task when measured across all segments in the transcript. Additionally, they attained a G-Eval score of over 4.6 for coherence in the summarization task. This research contributes to the emerging field of applying LLMs in psychiatric interviews and demonstrates their potential effectiveness in assisting mental health practitioners.
 
 <p align="center">
-  <img src="imgs/system_setup_2.png">
+  <img src="imgs/system.png">
   <b>Overview</b>
 <br><br>
   <img src="imgs/fig_modules.png">
