@@ -1,8 +1,8 @@
-# Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization
+# Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization : Pilot Study
 
 Jae-hee So, Joonhwan Chang, Eunji Kim, Junho Na, JiYeon Choi, Jy-yong Sohn, Byung-Hoon Kim, Sang Hui Chu
 
-This repository is the code implementation of paper *[Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization]()* 
+This repository is the code implementation of paper *[Aligning Large Language Models for Enhancing Psychiatric Interviews through Symptom Delineation and Summarization : Pilot Study](Aligning Large Language Models for Enhancing Psychiatric Interviews Through Symptom Delineation and Summarization: Pilot Study)* 
 
 ## Abstract
 
