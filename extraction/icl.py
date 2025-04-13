@@ -124,10 +124,10 @@ calculate_and_average_metrics(num_set_extract_symp2, icl_metric_symp)
 extract_sec = extract_sections(gpt_result)
 
 # tokenize the text of ground-truth sections and estimated sections and number tokens of the text
-token_num_sec = tokenize_numbering(extract_sec, token_num_sec)
+tokenize_numbering(extract_sec, token_num_sec)
 
 # calculate the mid-token of the ground-truth sections and estimated sections
-mid_token_calc_sec = mid_token_calc(token_num_sec, mid_token_calc_sec)
+mid_token_calc(token_num_sec, mid_token_calc_sec)
 
 # calculate the recall mid-token distance
 mid_token_dist_calc(mid_token_calc_sec, icl_midtoken)
