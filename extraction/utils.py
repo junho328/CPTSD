@@ -47,7 +47,7 @@ def extract_split_and_deduplicate_symptoms(df, source_column, target_column):
     df[target_column] = extracted_symptoms
 
 
-# rag_symp_ground-truth label
+# symp_ground-truth label
 def extract_symp_from_df_label(df, source_column, target_column):
     """
     Extracts symptoms from a column containing JSON-like structures, splits comma-separated symptoms,
@@ -108,41 +108,6 @@ def extract_symp_from_df_rag(df, source_column, target_column):
         extracted_symptoms_list.append(extract_symptoms(symptoms_data))
 
     df[target_column] = extracted_symptoms_list
-
-
-# icl_symp_ground-truth label
-def extract_symp_from_df_label(df, source_column, target_column):
-    """
-    Extracts symptoms from a column containing JSON-like structures, splits comma-separated symptoms,
-    deduplicates them, and adds them to a new column.
-
-    :param df: DataFrame containing the data
-    :param source_column: Column name from which to extract symptoms
-    :param target_column: Column name to store the extracted, split, and deduplicated symptoms
-    """
-    extracted_symptoms = []
-
-    # Iterate over each row in the dataframe
-    for index, row in df.iterrows():
-        # Parse the JSON-like string in the source column
-        try:
-            data = json.loads(row[source_column].replace("'", "\""))
-        except json.JSONDecodeError:
-            # In case of a decoding error, add a placeholder
-            extracted_symptoms.append(["Error in data"])
-            continue
-
-        # Extract, split and deduplicate the symptoms
-        symptoms = set()
-        for item in data:
-            if 'symptom' in item:
-                for symptom in item['symptom'].split(','):
-                    symptoms.add(symptom.strip())
-
-        extracted_symptoms.append(list(symptoms))
-
-    # Add the extracted symptoms to the dataframe in the target column
-    df[target_column] = extracted_symptoms
 
 
 # icl_symp_icl results
