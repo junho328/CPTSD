@@ -7,24 +7,30 @@ import re
 import argparse
 import json
 
-from utils import calculate_metrics
 from openai import OpenAI
+from utils import extract_split_and_deduplicate_symptoms
+from utils import calculate_num_set
+from utils import calculate_and_average_metrics
+from utils import extract_sections
+from utils import tokenize_numbering
+from utils import mid_token_calc
+from utils import mid_token_dist_calc
 
 
-parser = argparse.ArgumentParser(description='Extract Symptom and Section with Zero-shot Inference') 
-parser.add_argument('--data',help='Data File After Label Extraction with Excel Format', required=True)  
+parser = argparse.ArgumentParser(description='Estimate Symptom and Section with Zero-shot Inference') 
+parser.add_argument('--data', help='Data File After Label Extraction with Excel Format', required=True)  
 parser.add_argument('--apikey', help='Your openai api key', required=True)   
-parser.add_argument('--result',help='Filename of result data', required=True)
+parser.add_argument('--result', help='Filename of gpt result data', required=True)
 
 args = parser.parse_args()
 data_filename = args.data
 api_key = args.apikey
-result_filename = args.result
+gpt_result_filename = args.result
 
 
 def zeroshot(df):
     
-    client = OpenAI(api_key)
+    client = OpenAI(api_key = api_key)
 
     # Check if 'Statement' and 'Ground-truth label' columns exist in the data
     if 'Statement' in df.columns and 'Ground-truth label' in df.columns:
@@ -65,7 +71,27 @@ def zeroshot(df):
     else:
         print("No 'Statement' or 'Symptom' column found in the data.")
 
-    
+# zero-shot inference        
 data = pd.read_excel(f"{data_filename}.xlsx")
 zeroshot(data)
-calculate_metrics(result_filename)
+
+# extract ground-truth symptoms and estimated symptoms
+gpt_result = pd.read_excel(f"{gpt_result_filename}.xlsx")
+extract_symp1 = extract_split_and_deduplicate_symptoms(gpt_result, "Ground-truth label", "Symptom")
+extract_symp2 = extract_split_and_deduplicate_symptoms(extract_symp1, "Estimation", "Estimated Symptom")
+
+# calcuate metrics used for multi-label classification in estimating symptoms
+num_set_extract_symp2 = calculate_num_set(extract_symp2) 
+calculate_and_average_metrics(num_set_extract_symp2, zeroshot_metric)
+
+# extract ground-truth sections and estimated sections
+extract_sec = extract_sections(gpt_result)
+
+# tokenize the text of ground-truth sections and estimated sections and number tokens of the text
+token_num_sec = tokenize_numbering(extract_sec, token_num_sec)
+
+# calculate the mid-token of the ground-truth sections and estimated sections
+mid_token_calc_sec = mid_token_calc(token_num_sec, mid_token_calc_sec)
+
+# calculate the recall mid-token distance
+mid_token_dist_calc(mid_token_calc_sec, zeroshot_midtoken_dist)
