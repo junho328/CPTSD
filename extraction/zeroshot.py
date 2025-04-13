@@ -1,10 +1,14 @@
 import openai
+import os
 import openpyxl
 import pandas as pd
+import numpy as np
 import re
 import argparse
 import json
+
 from utils import calculate_metrics
+from openai import OpenAI
 
 
 parser = argparse.ArgumentParser(description='Extract Symptom and Section with Zero-shot Inference') 
@@ -17,72 +21,51 @@ data_filename = args.data
 api_key = args.apikey
 result_filename = args.result
 
+
 def zeroshot(df):
     
-    openai.api_key = api_key
+    client = OpenAI(api_key)
 
-    # Check if 'Statement' and 'Symptom' columns exist in the data
-    if 'Statement' in df.columns and 'Symptom' in df.columns:
+    # Check if 'Statement' and 'Ground-truth label' columns exist in the data
+    if 'Statement' in df.columns and 'Ground-truth label' in df.columns:
         # Initialize the columns for estimated symptom and section
-        df['Estimated symptom'] = ''
-        df['Estimated Section'] = ''
-        df['Correct'] = 0
+        df['Estimation'] = ''
         
         for idx, row in df.iterrows():
             try:
 
-                model = "gpt-4"
+                model = "gpt-4-1106-preview"
                 
-                query = f"다음 상담 내용을 보고 정신건강의학적으로 유의미한 증상이 있다고 생각되면 해당 증상과 이를 시사하는 구획을 알려줘. {row['Statement']}"
+                query = f"다음 인터뷰를 보고 PTSD와 연관된 정신질환 증상이 있다고 생각하면 해당 증상(symptom) 및 이를 나타내는 구획(section)을 알려줘. {row['Statement']}"
 
                 messages = [
-                    {"role": "system", "content": "너에게 I와 P7의 인터뷰가 주어질 거야. 다음 상담 내용을 보고 정신건강의학적으로 유의미한 증상이 있다고 생각되면 해당 증상과 이를 시사하는 구획을 알려줘.\
-                    증상은 '- 증상 : ...' 형태로 대답하고 구획은 '- 구획 : ...' 형태로 대답해줘. 만약 주어진 인터뷰에 정신건강의학적으로 유의미한 증상이 없다면 '해당없음'이라고 대답해줘.\
-                    정신건강의학적으로 유의미한 증상에는 알코올 의존, 불안, 회피, 흉통, 불면, 인지의 부정적 변화, 자기 무가치감, 재경험, 자살사고, 정신운동초조, 과각성, 질식, 흥미상실 이 있어."},
+                    {"role": "system", "content": "너에게 인터뷰가 주어질 거야. PTSD와 연관된 정신질환 증상(symptom) 및 이를 나타내는 구획(section)을 대답할 때, [{'symptom': '...', 'section': '...'}, {'symptom': '...', 'section': '...'}, ...] 형태로 반드시 대답해줘. \
+                    특정 구획(section)에 여러 증상(symptom)이 있다고 생각하면, [{'symptom': '..., ...', 'section': '...'}, ...] 형태로 대답하면 돼. 만약 주어진 인터뷰에 PTSD와 연관된 정신질환 증상이 없다면 [{'symptom': 'none', 'section': 'none'}] 이라고 대답해줘.\
+                    PTSD와 연관된 정신질환 증상(symptom)을 label(symptom)의 형태로 알려줄게. 다음과 같은 증상(symptom)들이 있어.\
+                    reex(Reexperience), avoid(Avoidance), ncog(Negative change in cognition), nmood(Negative change in mood), arousal(Arousal), disso(Dissociation), demo(Difficulty in emotional regulation), nself(Negative self-image), \
+                    drelat(Difficulty in relationship), depress(Depressed mood), dinter(Decreased interest), dapp(Decreased appetite), iapp(Increased appetite), insom(Insomnia), hsom(Hypersomnia), agit(Psychomotor agitation), retard(Psychomotor retardation), \
+                    fati(Fatigue), worth(Worthlessness), guilty(Excessive guilt), dcon(Decreased concentration), dmemo(Decreased memory), ddeci(Decreased decision), suii(Suicidal ideation), suip(Suicide plan), suia(Suicide attempt), anxiety(Anxiety), \
+                    palpi(Palpitation), sweat(Sweating), trembl(Trembling), breath(Shortness of breath), chok(Choking), chest(Chest pain), nausea(Nausea), dizzy(Dizziness), chhe(Chilling), pares(Paresthesia), control(Loss of control), dying(Fear of dying), \
+                    adepen(Alcohol dependence), atoler(Alcohol tolerance), awithdr(Alcohol withdrawal) 와 같이 총 42개의 증상(symptom)이 있어. \
+                    증상(symptom)을 대답할 때는 반드시 label로 대답해주고, 구획(section)을 대답할 때는 반드시 주어진 인터뷰 문구 그대로 가져와서 대답해줘."},
                     {"role": "user", "content": query}]
                 
-                response = openai.ChatCompletion.create(
-                    model=model,
-                    messages=messages)
+                response = client.chat.completions.create(
+                    model = model,
+                    messages = messages)
                 
+                df.loc[idx, 'Estimation'] = response.choices[0].message.content
             
-                # Extract the symptom and the section from the response
-                symptom_match = re.search(r'- 증상 : (.*)', response['choices'][0]['message']['content'])
-                section_match = re.search(r'- 구획 : (.*)', response['choices'][0]['message']['content'])
-                
-                if response['choices'][0]['message']['content'] == '해당없음':
-                    df.loc[idx, 'Estimated symptom'] = '해당없음'
-                    df.loc[idx, 'Estimated Section'] = '해당없음'
-                    
-                    # Check if the estimated symptom matches the actual symptom
-                    if symptom == row['Symptom']:
-                        df.loc[idx, 'Correct'] = 1
-            
-                elif symptom_match:
-                    # Strip the leading ':' and whitespace
-                    symptom = symptom_match.group(1).lstrip(': ').strip()
-                    df.loc[idx, 'Estimated symptom'] = symptom
-                
-                    # Check if the estimated symptom matches the actual symptom
-                    if symptom == row['Symptom']:
-                        df.loc[idx, 'Correct'] = 1
-            
-                if section_match:
-                    # Strip the leading ':' and whitespace
-                    section = section_match.group(1).lstrip(': ').strip()
-                    df.loc[idx, 'Estimated Section'] = section
                     
             except openai.error.InvalidRequestError:
-                df.loc[idx, 'Estimated symptom'] = 'Error'
-                df.loc[idx, 'Estimated Section'] = 'Error'
-                df.loc[idx, 'Correct'] = 'Error'
-        
+                df.loc[idx, 'Estimation'] = 'Error'
+                
         # Save the dataframe to a new excel file
         df.to_excel(f'{result_filename}.xlsx', index=False)
     else:
         print("No 'Statement' or 'Symptom' column found in the data.")
+
     
 data = pd.read_excel(f"{data_filename}.xlsx")
 zeroshot(data)
 calculate_metrics(result_filename)
-
