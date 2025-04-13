@@ -200,9 +200,9 @@ def extract_symp_from_df_icl(df, source_column, target_column):
 
 
 # symp
-def calculate_num_set(df1, df2, df3, df4):
+def calculate_num_set(df1):
     # Combine the four DataFrames into one
-    combined_df = pd.concat([df1, df2, df3, df4], ignore_index=True)
+    combined_df = df1
 
     combined_df['num_symptoms'] = 1
     combined_df['num_estimated_symptoms'] = 1
@@ -226,7 +226,6 @@ def calculate_num_set(df1, df2, df3, df4):
     num_union_list = []
     num_intersection_list = []
 
-
     for i, row in combined_df.iterrows():
         num_symptoms, num_estimated_symptoms, num_union, num_intersection = calculate_metrics(row)
 
@@ -235,7 +234,6 @@ def calculate_num_set(df1, df2, df3, df4):
         num_estimated_symptoms_list.append(num_estimated_symptoms)
         num_union_list.append(num_union)
         num_intersection_list.append(num_intersection)
-
 
     combined_df['num_symptoms'] = num_symptoms_list
     combined_df['num_estimated_symptoms'] = num_estimated_symptoms_list
