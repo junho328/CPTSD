@@ -229,7 +229,6 @@ def calculate_num_set(df1):
     for i, row in combined_df.iterrows():
         num_symptoms, num_estimated_symptoms, num_union, num_intersection = calculate_metrics(row)
 
-        # 각 리스트에 계산된 값을 추가
         num_symptoms_list.append(num_symptoms)
         num_estimated_symptoms_list.append(num_estimated_symptoms)
         num_union_list.append(num_union)
